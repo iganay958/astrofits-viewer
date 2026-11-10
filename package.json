@@ -1,0 +1,105 @@
+{
+  "name": "astro-fits-reviewer",
+  "displayName": "Astro FITS Reviewer",
+  "description": "View astronomy FITS images and spectral cubes in VS Code: headers, WCS, channels, beams and region statistics.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.145.0"
+  },
+  "categories": [
+    "Visualization",
+    "Data Science",
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "astroFitsReviewer.viewer",
+        "displayName": "FITS Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.fits"
+          },
+          {
+            "filenamePattern": "*.fit"
+          },
+          {
+            "filenamePattern": "*.fts"
+          },
+          {
+            "filenamePattern": "*.FITS"
+          },
+          {
+            "filenamePattern": "*.FIT"
+          },
+          {
+            "filenamePattern": "*.fits.gz"
+          },
+          {
+            "filenamePattern": "*.fit.gz"
+          },
+          {
+            "filenamePattern": "*.fts.gz"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "astro-fits-reviewer.openFile",
+        "title": "Open FITS File…",
+        "category": "FITS"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "astro-fits-reviewer.openFile",
+          "when": "resourceExtname =~ /\\.(fits?|fts|gz|fz)$/i",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.145.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "esbuild": "^0.28.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  },
+  "keywords": [
+    "fits",
+    "astronomy",
+    "alma",
+    "wcs",
+    "spectral cube",
+    "radio astronomy"
+  ]
+}

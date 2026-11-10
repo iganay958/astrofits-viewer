@@ -1,0 +1,12 @@
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
+
+# Astronomy data files (keep test data out of the repository)
+*.fits
+*.fit
+*.fts
+*.fits.gz
+*.fz
